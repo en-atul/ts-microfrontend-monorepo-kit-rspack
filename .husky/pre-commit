@@ -1,0 +1,9 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# chmod +x scripts/check-pnpm.sh
+
+# sh scripts/check-pnpm.sh
+
+# Run ESLint and Prettier checks using our CLI tool
+pnpm dev-cli lint

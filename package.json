@@ -1,0 +1,45 @@
+{
+	"private": true,
+	"name": "micro-frontend-monorepo",
+	"version": "1.0.0",
+	"description": "A modern monorepo boilerplate for building scalable micro-frontend applications from scratch — powered by Webpack 5 Module Federation, pnpm Workspaces, and Lerna.",
+	"scripts": {
+		"start:host": "pnpm --filter @repo/host-app dev",
+		"start:remote": "pnpm --filter @repo/remote-app dev",
+		"dev": "scripts/workspace-runner.js dev",
+		"build": "pnpm gulp",
+		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
+		"postinstall": "find scripts -type f -exec grep -Il '^#!/usr/bin/env node' {} \\; | xargs chmod +x",
+		"lint": "pnpm --filter @repo/remote-app lint && pnpm --filter @repo/host-app lint"
+	},
+	"keywords": [
+		"monorepo",
+		"micro frontend",
+		"webpack",
+		"module federation",
+		"pnpm workspaces",
+		"lerna",
+		"react",
+		"typescript"
+	],
+	"author": "atul",
+	"license": "MIT",
+	"devDependencies": {
+		"@repo/dev-cli": "workspace:*",
+		"@types/jest": "^29.5.14",
+		"blessed": "0.1.81",
+		"chalk": "4.1.2",
+		"del": "8.0.0",
+		"gulp": "5.0.0",
+		"husky": "6.0.0",
+		"jest": "29.7.0",
+		"lerna": "^8.2.2",
+		"lint-staged": "^15.5.1",
+		"prettier": "^3.5.3",
+		"ts-jest": "^29.3.2"
+	},
+	"packageManager": "pnpm@9.0.0",
+	"engines": {
+		"node": ">=18"
+	}
+}

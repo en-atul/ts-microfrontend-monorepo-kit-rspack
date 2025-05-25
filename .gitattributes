@@ -1,0 +1,51 @@
+# Ensure consistent line endings across all files
+* text=auto
+
+# # Force LF line endings for all JavaScript/TypeScript files
+# *.js text eol=lf
+# *.ts text eol=lf
+# *.tsx text eol=lf
+# *.jsx text eol=lf
+
+# # Force CRLF line endings for Windows-specific files
+# *.bat text eol=crlf
+# *.cmd text eol=crlf
+
+# # Specify binary files (no diffing)
+# *.png binary
+# *.jpg binary
+# *.jpeg binary
+# *.gif binary
+# *.svg binary
+# *.pdf binary
+# *.zip binary
+# *.tar binary
+# *.tar.gz binary
+
+# # Avoid line endings issues in lock files (e.g., yarn.lock, package-lock.json)
+# *.lock text eol=lf
+
+# # Specify custom merge strategies for certain files
+# # For example, `package-lock.json` or `yarn.lock` files can be handled by the "ours" merge strategy
+# package-lock.json merge=ours
+# yarn.lock merge=ours
+
+# # Ignore specific files during `git archive`
+# node_modules/** export-ignore
+# dist/** export-ignore
+# build/** export-ignore
+
+# # Specify file type for GitHub linguist (language detection)
+# # Override the default language detection for some specific file types
+# *.md linguist-language=Markdown
+# *.json linguist-language=JSON
+
+# # Ensure that GitHub treats all directories as "vendor" if needed
+# node_modules/** linguist-vendored
+
+# # Merge .env files using the "ours" strategy to avoid merge conflicts (since they're typically local)
+# *.env merge=ours
+
+# # Handle mono repo-specific directories or sub-packages in a certain way
+# packages/*/dist/** export-ignore
+# packages/*/build/** export-ignore

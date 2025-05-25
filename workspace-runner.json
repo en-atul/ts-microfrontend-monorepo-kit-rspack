@@ -1,0 +1,18 @@
+{
+	"ui": "wui",
+	"apps": {
+		"@repo/host-app": {
+			"scripts": [
+				"dev",
+				"build"
+			]
+		},
+		"@repo/remote-app": {
+			"scripts": [
+				"dev",
+				"lint",
+				"check-types"
+			]
+		}
+	}
+}

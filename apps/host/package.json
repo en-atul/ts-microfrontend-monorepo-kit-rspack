@@ -1,0 +1,44 @@
+{
+	"name": "@repo/host-app",
+	"version": "1.0.0",
+	"license": "MIT",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"build": "NODE_ENV=production webpack --config webpack.config.js --mode=production",
+		"clean-build": "gulp",
+		"lint": "eslint \"src/**/*.{ts,tsx}\"",
+		"dev": "NODE_ENV=development node webpack.config.js --mode=development",
+		"serve": "node webpack.config.js --mode=production --serve=true"
+	},
+	"dependencies": {
+		"@repo/ui": "workspace:*",
+		"@repo/utils": "workspace:*",
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0"
+	},
+	"devDependencies": {
+		"@repo/babel-config": "workspace:*",
+		"@repo/eslint-config": "workspace:*",
+		"@repo/typescript-config": "workspace:*",
+		"@repo/rspack-config": "workspace:*",
+		"@types/react": "^19.1.2",
+		"@types/react-dom": "^19.1.2",
+		"autoprefixer": "^10.4.21",
+		"babel-loader": "10.0.0",
+		"css-loader": "^7.1.2",
+		"eslint": "^9.25.0",
+		"eslint-import-resolver-typescript": "4.3.4",
+		"eslint-plugin-import": "^2.31.0",
+		"file-loader": "^6.2.0",
+		"postcss": "^8.5.3",
+		"postcss-loader": "^8.1.1",
+		"sass": "^1.87.0",
+		"sass-loader": "^16.0.5",
+		"style-loader": "^4.0.0",
+		"ts-loader": "^9.5.2",
+		"typescript": "5.8.3",
+		"url-loader": "^4.1.1",
+		"webpack-hot-middleware": "^2.26.1"
+	}
+}

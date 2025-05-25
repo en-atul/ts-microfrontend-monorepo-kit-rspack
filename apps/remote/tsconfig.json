@@ -1,0 +1,21 @@
+{
+	"extends": "@repo/typescript-config/reactjs.json",
+	"compilerOptions": {
+		"outDir": "dist",
+		"baseUrl": "src",
+		"paths": {
+			"@repo/ui/*": [
+				"../../../packages/ui/src/*"
+			],
+			"@repo/utils/*": [
+				"../../../packages/utils/src/*"
+			]
+		}
+	},
+	"include": [
+		"src/**/*"
+	],
+	"exclude": [
+		"node_modules"
+	]
+}

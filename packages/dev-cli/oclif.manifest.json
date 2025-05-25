@@ -1,0 +1,22 @@
+{
+	"commands": {
+		"lint": {
+			"id": "lint",
+			"description": "Run ESLint and Prettier checks",
+			"pluginName": "@repo/dev-cli",
+			"pluginType": "core",
+			"aliases": [],
+			"flags": {
+				"fix": {
+					"name": "fix",
+					"type": "boolean",
+					"char": "f",
+					"description": "Automatically fix issues when possible",
+					"allowNo": false
+				}
+			},
+			"args": {}
+		}
+	},
+	"version": "1.0.0"
+}

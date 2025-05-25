@@ -1,0 +1,52 @@
+{
+	"name": "@repo/dev-cli",
+	"version": "1.0.0",
+	"description": "CLI tool for development workflow",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"bin": {
+		"dev-cli": "./bin/run"
+	},
+	"scripts": {
+		"build": "tsc -b",
+		"watch": "cd ../.. && pnpm gulp watch",
+		"lint": "eslint .",
+		"postpack": "rm -f oclif.manifest.json",
+		"prepack": "rm -rf dist && tsc -b && oclif manifest && oclif readme",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"version": "oclif readme && git add README.md"
+	},
+	"keywords": [
+		"cli",
+		"development",
+		"tools"
+	],
+	"author": "atul",
+	"license": "MIT",
+	"devDependencies": {
+		"@oclif/core": "^3.19.2",
+		"@types/node": "^22.15.18",
+		"@types/ora": "3.2.0",
+		"micromatch": "4.0.8",
+		"ora": "^5.4.1",
+		"picocolors": "^1.0.0",
+		"simple-git": "3.27.0",
+		"ts-node": "^10.9.2",
+		"tslib": "2.8.1",
+		"typescript": "^5.8.3"
+	},
+	"files": [
+		"/bin",
+		"/dist",
+		"/npm-shrinkwrap.json",
+		"/oclif.manifest.json"
+	],
+	"oclif": {
+		"bin": "dev-cli",
+		"dirname": "dev-cli",
+		"commands": "./dist/commands",
+		"plugins": [
+			"@oclif/plugin-help"
+		]
+	}
+}
