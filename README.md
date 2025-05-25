@@ -1,6 +1,6 @@
 # 🚀 TypeScript Microfrontend Monorepo Kit
 
-![Banner](screenshots/banner.png)
+<!-- ![Banner](screenshots/banner.png) -->
 
 A production-ready monorepo boilerplate for building scalable microfrontend applications, powered by
 modern web technologies and best practices. Built entirely from scratch without using any cli tools,
