@@ -42,7 +42,7 @@ const start = ({ mode, appName, port, allowedOrigins, ...rest }) => {
 				stats: 'minimal',
 			}),
 		);
-		
+
 		// Add hot middleware
 		app.use(webpackHotMiddleware(compiler));
 	} else {

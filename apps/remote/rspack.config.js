@@ -22,7 +22,7 @@ const baseFederationConfig = {
 	name: 'remoteApp',
 	filename: 'remoteEntry.js',
 	exposes: {
-		'./RemoteComponent': 'RemoteComponent.tsx',
+		'./Counter': 'Counter.tsx',
 	},
 	shared: {
 		...deps,
@@ -37,7 +37,9 @@ const getEnvironmentConfig = (env) => {
 		case 'development':
 			return {
 				publicPath: `http://localhost:${port}/`,
-				remotes: {},
+				remotes: {
+					hostApp: 'http://localhost:3000/remoteEntry.js',
+				},
 				allowedOrigins: ['http://localhost:3000/'],
 			};
 

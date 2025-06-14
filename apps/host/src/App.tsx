@@ -3,7 +3,7 @@ import React, { Suspense, useEffect } from 'react';
 
 import ErrorBoundary from './ErrorBoundary';
 
-const RemoteComponent = React.lazy(() => import('remoteApp/RemoteComponent'));
+const Counter = React.lazy(() => import('remoteApp/Counter'));
 
 const App: React.FC = () => {
 	useEffect(() => {
@@ -15,7 +15,7 @@ const App: React.FC = () => {
 			<h1>🚀 Host App!</h1>
 			<ErrorBoundary message="Failed to load Remote 'Counter' component. Please try again later.">
 				<Suspense fallback={<div>Loading Remote Component...</div>}>
-					<RemoteComponent />
+					<Counter />
 				</Suspense>
 			</ErrorBoundary>
 		</div>

@@ -38,7 +38,7 @@ const getEnvironmentConfig = (env) => {
 				remotes: {
 					remoteApp: 'http://localhost:3001/remoteEntry.js',
 				},
-				allowedOrigins: [],
+				allowedOrigins: ['http://localhost:3001/'],
 			};
 
 		case 'staging':

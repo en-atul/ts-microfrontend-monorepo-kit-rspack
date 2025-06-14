@@ -10,7 +10,7 @@ function usePrevious<T>(value: T): T {
 	return ref.current;
 }
 
-const RemoteComponent = () => {
+const Counter = () => {
 	const [seconds, setSeconds] = useState(0);
 	const [isRunning, setIsRunning] = useState(false);
 	const [isPaused, setIsPaused] = useState(false);
@@ -125,4 +125,4 @@ const RemoteComponent = () => {
 		</div>
 	);
 };
-export default RemoteComponent;
+export default Counter;

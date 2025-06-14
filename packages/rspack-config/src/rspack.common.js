@@ -2,7 +2,7 @@ import path from 'path';
 import { createBaseRspackConfig } from './rspack.base.js';
 import { getFilePaths } from './utils.js';
 
-const getCommonConfig = ({ mode,baseUrl, aliases = {} }) => {
+const getCommonConfig = ({ mode, baseUrl, aliases = {} }) => {
 	const { __dirname } = getFilePaths(baseUrl);
 
 	const SRC = path.resolve(__dirname, './src');
@@ -13,7 +13,7 @@ const getCommonConfig = ({ mode,baseUrl, aliases = {} }) => {
 		srcPath: SRC,
 		publicPath: PUBLIC,
 		aliases,
-		mode
+		mode,
 	});
 
 	return {

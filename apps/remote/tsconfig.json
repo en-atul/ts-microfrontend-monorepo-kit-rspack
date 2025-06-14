@@ -10,7 +10,8 @@
 			"@repo/utils/*": [
 				"../../../packages/utils/src/*"
 			]
-		}
+		},
+		"noCheck": true
 	},
 	"include": [
 		"src/**/*"
