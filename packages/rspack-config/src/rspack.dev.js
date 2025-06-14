@@ -19,24 +19,15 @@ export default ({ baseUrl, configs }) => {
 	return {
 		mode: 'development',
 		devtool: 'cheap-module-source-map',
-		entry: path.resolve(SRC, 'index.tsx'),
-
+		entry: {
+			main: ['webpack-hot-middleware/client', path.resolve(SRC, 'index.tsx')],
+		},
 		output: {
 			publicPath: configs.publicPath,
+			hotUpdateChunkFilename: '[id].[fullhash].hot-update.js',
+			hotUpdateMainFilename: '[fullhash].hot-update.json',
 		},
-		// devServer: {
-		// 	hot: true,
-		// 	port: 3000, // or customize per app
-		// 	historyApiFallback: true,
-		// },
 		plugins: [
-			// new rspack.container.ModuleFederationPlugin({
-			// 	name: configs.name,
-			// 	filename: configs.filename,
-			// 	exposes: createExposeEntries(configs.exposes),
-			// 	remotes: createRemoteEntries(configs.remotes),
-			// 	shared: configs.shared,
-			// }),
 			new ModuleFederationPlugin({
 				name: configs.name,
 				filename: configs.filename,

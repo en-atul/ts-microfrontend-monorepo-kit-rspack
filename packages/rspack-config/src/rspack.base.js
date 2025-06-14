@@ -53,7 +53,6 @@ const createBaseRspackConfig = ({ rootPath, srcPath, publicPath, aliases = {}, m
 								react: {
 									runtime: 'automatic',
 									refresh: isDevelopment,
-									development: isDevelopment,
 								},
 							},
 							target: 'es2022',

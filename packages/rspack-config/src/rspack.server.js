@@ -2,6 +2,7 @@ import path from 'path';
 import express from 'express';
 import { rspack } from '@rspack/core';
 import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 import { getConfig } from './rspack.config.js';
 import { getFilePaths } from './utils.js';
 
@@ -41,6 +42,9 @@ const start = ({ mode, appName, port, allowedOrigins, ...rest }) => {
 				stats: 'minimal',
 			}),
 		);
+		
+		// Add hot middleware
+		app.use(webpackHotMiddleware(compiler));
 	} else {
 		// Static file handling for production
 		app.use(express.static(path.resolve(__dirname, 'dist')));
@@ -59,4 +63,5 @@ const start = ({ mode, appName, port, allowedOrigins, ...rest }) => {
 		console.log(`\n🚀 [\x1b[35m${appName}\x1b[0m] running at ${PROTOCOL}://${HOST}:${PORT}\n`);
 	});
 };
+
 export { start };
