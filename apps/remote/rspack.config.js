@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import pc from 'picocolors';
 import { createRequire } from 'module';
 import { start } from '@repo/rspack-config/server';
 import { getConfig } from '@repo/rspack-config/config';
@@ -88,7 +88,7 @@ if (isBuildServing || isDevServing) {
 		mode,
 	});
 } else {
-	console.log(chalk.grey(`[Build]: ${chalk.magenta(mode)}`));
+	console.log(pc.grey(`[Build]: ${pc.magenta(mode)}`));
 
 	config = getConfig({
 		baseUrl: moduleUrl,

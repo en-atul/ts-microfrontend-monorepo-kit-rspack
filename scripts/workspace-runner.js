@@ -3,12 +3,12 @@
 const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
-const chalk = require('chalk');
+const pc = require('picocolors');
 
 // Load configuration
 const configPath = path.join(process.cwd(), 'workspace-runner.json');
 if (!fs.existsSync(configPath)) {
-	console.error(chalk.red.bold('❌ Missing workspace-runner.json'));
+	console.error(pc.red.bold('❌ Missing workspace-runner.json'));
 	process.exit(1);
 }
 const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
@@ -64,7 +64,7 @@ function resolveYarnPackages() {
 const allPkgPaths = isPnpm ? resolvePnpmPackages() : isYarn ? resolveYarnPackages() : [];
 
 if (allPkgPaths.length === 0) {
-	console.error(chalk.red.bold('🚫 No packages found or no workspace configuration detected.'));
+	console.error(pc.red.bold('🚫 No packages found or no workspace configuration detected.'));
 	process.exit(1);
 }
 
@@ -77,7 +77,7 @@ const runningPackages = allPkgPaths.filter((pkgPath) => {
 });
 
 if (runningPackages.length === 0) {
-	console.error(chalk.red.bold('⚠️ No running applications found with the specified command.'));
+	console.error(pc.red.bold('⚠️ No running applications found with the specified command.'));
 	process.exit(1);
 }
 
@@ -99,10 +99,10 @@ function runScript(pkgPath, name) {
 		});
 
 		proc.on('close', (code) => {
-			updateLog(name, chalk.red(`❌ exited with code ${code}`));
+			updateLog(name, pc.red(`❌ exited with code ${code}`));
 		});
 	} else {
-		console.log(`${chalk.cyan('▶ Running')} ${chalk.magenta(command)} in ${chalk.yellow(name)}`);
+		console.log(`${pc.cyan('▶ Running')} ${pc.magenta(command)} in ${pc.yellow(name)}`);
 	}
 
 	return proc;
@@ -198,20 +198,20 @@ screen.on('resize', () => {
 const processes = {};
 
 function cleanup() {
-	console.log(chalk.yellow('\n🧹 Stopping all running applications...\n'));
+	console.log(pc.yellow('\n🧹 Stopping all running applications...\n'));
 
 	Object.keys(processes).forEach((k) => {
 		const proc = processes[k];
 		if (proc && !proc.killed) {
 			proc.kill('SIGINT');
 			console.log(
-				`${chalk.gray(`[${chalk.magenta(k)}]`)} ${chalk.red('Application stopped')} ${chalk.dim(proc.spawnargs.join(' '))}`,
+				`${pc.gray(`[${pc.magenta(k)}]`)} ${pc.red('Application stopped')} ${pc.dim(proc.spawnargs.join(' '))}`,
 			);
 		}
 	});
 
 	setTimeout(() => {
-		console.log(chalk.green('\n✅ All applications stopped. Exiting the workspace manager...\n'));
+		console.log(pc.green('\n✅ All applications stopped. Exiting the workspace manager...\n'));
 		process.exit(0);
 	}, 500);
 }
@@ -293,13 +293,13 @@ screen.key(['up', 'down'], (ch, key) => {
 });
 
 screen.key(['escape', 'C-c'], () => {
-	console.log(chalk.blueBright('\n🧹 Cleaning up and exiting blessed screen...'));
+	console.log(pc.blueBright('\n🧹 Cleaning up and exiting blessed screen...'));
 	screen.destroy();
 	cleanup();
 });
 
 process.on('SIGINT', () => {
-	console.log(chalk.red.bold('\n[SIGINT] Ctrl+C detected. Entering cleanup...'));
-	console.log(chalk.gray('Processes:'), Object.keys(processes));
+	console.log(pc.red.bold('\n[SIGINT] Ctrl+C detected. Entering cleanup...'));
+	console.log(pc.gray('Processes:'), Object.keys(processes));
 	cleanup();
 });
