@@ -5,11 +5,11 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"build": "NODE_ENV=production webpack --config webpack.config.js --mode=production",
+		"build": "NODE_ENV=production rspack --config rspack.config.js --mode=production",
 		"clean-build": "gulp",
 		"lint": "eslint \"src/**/*.{ts,tsx}\"",
-		"dev": "NODE_ENV=development node webpack.config.js --mode=development",
-		"serve": "node webpack.config.js --mode=production --serve=true"
+		"dev": "NODE_ENV=development node rspack.config.js --mode=development",
+		"serve": "node rspack.config.js --mode=production --serve=true"
 	},
 	"dependencies": {
 		"@repo/ui": "workspace:*",

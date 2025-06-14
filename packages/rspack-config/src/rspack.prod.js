@@ -1,8 +1,7 @@
 import path from 'path';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import ModuleFederationPlugin from 'webpack/lib/container/ModuleFederationPlugin.js';
 import { getFilePaths } from './utils.js';
+import { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
+import { rspack } from '@rspack/core';
 
 export default ({ baseUrl, configs }) => {
 	const { __dirname } = getFilePaths(baseUrl);
@@ -23,6 +22,7 @@ export default ({ baseUrl, configs }) => {
 			filename: '[name].[contenthash].js',
 			path: __dirname + '/dist',
 			publicPath: configs.publicPath,
+			clean: true
 		},
 		plugins: [
 			new ModuleFederationPlugin({
@@ -32,8 +32,9 @@ export default ({ baseUrl, configs }) => {
 				remotes: createRemoteEntries(configs.remotes),
 				shared: configs.shared,
 			}),
-			new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
-			new CleanWebpackPlugin(),
+			new rspack.CssExtractRspackPlugin({
+				filename: '[name].[contenthash].css',
+			}),
 		],
 	};
 };

@@ -1,23 +1,23 @@
 import path from 'path';
 import express from 'express';
-import webpack from 'webpack';
+import { rspack } from '@rspack/core';
 import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
-import { getConfig } from './webpack.config.js';
+import { getConfig } from './rspack.config.js';
 import { getFilePaths } from './utils.js';
 
 const start = ({ mode, appName, port, allowedOrigins, ...rest }) => {
 	const { __dirname } = getFilePaths(rest.baseUrl);
 
-	const webpackConfig = getConfig(rest);
-	const app = express();
-	const compiler = webpack(webpackConfig);
+	const rspackConfig = getConfig(rest);
+	const compiler = rspack(rspackConfig);
 
 	const HOST = process.env.HOST || 'localhost';
 	const PORT = process.env.PORT || port;
 	const PROTOCOL = process.env.PROTOCOL || 'http';
 
 	const isDevelopment = mode === 'development';
+
+	const app = express();
 
 	app.use('/remoteEntry.js', (req, res, next) => {
 		const referer = req.get('origin') || req.get('referer');
@@ -37,11 +37,10 @@ const start = ({ mode, appName, port, allowedOrigins, ...rest }) => {
 		// Webpack middlewares
 		app.use(
 			webpackDevMiddleware(compiler, {
-				publicPath: webpackConfig.output.publicPath,
+				publicPath: rspackConfig.output.publicPath,
 				stats: 'minimal',
 			}),
 		);
-		app.use(webpackHotMiddleware(compiler));
 	} else {
 		// Static file handling for production
 		app.use(express.static(path.resolve(__dirname, 'dist')));

@@ -1,9 +1,8 @@
 import path from 'path';
 import fs from 'fs';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import Dotenv from 'dotenv-webpack';
 import { getFilePaths } from './utils.js';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { rspack } from '@rspack/core';
 
 const { __dirname } = getFilePaths(import.meta.url);
 
@@ -15,15 +14,14 @@ const createBaseRspackConfig = ({ rootPath, srcPath, publicPath, aliases = {}, m
 		utils: path.join(ROOT, 'packages/utils/src'),
 	};
 
-	const babelConfigPath = path.join(ROOT, 'packages/babel-config/index.js');
-
 	// Load environment variables
 	const nodeEnv = process.env.NODE_ENV || 'development';
 	const envPath = `.env.${nodeEnv}`;
 	const dotenvPath = path.resolve(rootPath, envPath);
 	const fallbackDotenvPath = path.resolve(rootPath, '.env');
+	const isDevelopment = nodeEnv === 'development';
 
-	const styleLoader = mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader';
+	const styleLoader = mode === 'production' ? rspack.CssExtractRspackPlugin.loader : 'style-loader';
 
 	return {
 		entry: path.join(srcPath, 'index.tsx'),
@@ -44,11 +42,21 @@ const createBaseRspackConfig = ({ rootPath, srcPath, publicPath, aliases = {}, m
 					test: /\.[jt]sx?$/,
 					include: [srcPath, ...Object.values(PACKAGES)],
 					exclude: /node_modules/,
-					use: {
-						loader: 'babel-loader',
-						options: {
-							cacheDirectory: true,
-							configFile: babelConfigPath,
+					loader: 'builtin:swc-loader',
+					options: {
+						jsc: {
+							parser: {
+								syntax: 'typescript',
+								tsx: true,
+							},
+							transform: {
+								react: {
+									runtime: 'automatic',
+									refresh: isDevelopment,
+									development: isDevelopment,
+								},
+							},
+							target: 'es2022',
 						},
 					},
 				},
@@ -103,9 +111,8 @@ const createBaseRspackConfig = ({ rootPath, srcPath, publicPath, aliases = {}, m
 				},
 			],
 		},
-
 		plugins: [
-			new HtmlWebpackPlugin({
+			new rspack.HtmlRspackPlugin({
 				template: path.join(publicPath, 'index.html'),
 			}),
 			new Dotenv({
