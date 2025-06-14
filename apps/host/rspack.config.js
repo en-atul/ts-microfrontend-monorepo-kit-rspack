@@ -94,7 +94,7 @@ if (isBuildServing || isDevServing) {
 		mode,
 	});
 } else {
-	console.log(pc.grey(`[Build]: ${pc.magenta(mode)}`));
+	console.log(pc.gray(`[Build]: ${pc.magenta(mode)}`));
 
 	config = getConfig({
 		baseUrl: moduleUrl,
