@@ -1,6 +1,4 @@
-# 🚧 WIP
-
-# 🚀 TypeScript Microfrontend Monorepo Kit
+# 🚀 TypeScript Microfrontend Monorepo Kit - RSpack
 
 <!-- ![Banner](screenshots/banner.png) -->
 
