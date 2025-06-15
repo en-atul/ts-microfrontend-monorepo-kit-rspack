@@ -14,7 +14,7 @@ const App: React.FC = () => {
 		<div>
 			<h1>🚀 Host App!</h1>
 			<ErrorBoundary message="Failed to load Remote 'Counter' component. Please try again later.">
-				<Suspense fallback={<div>Loading Remote Component...</div>}>
+				<Suspense fallback={<div>Loading Counter Component...</div>}>
 					<Counter />
 				</Suspense>
 			</ErrorBoundary>

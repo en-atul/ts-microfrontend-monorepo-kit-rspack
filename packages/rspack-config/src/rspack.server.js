@@ -51,12 +51,25 @@ const start = ({ mode, appName, port, allowedOrigins, ...rest }) => {
 	}
 
 	// Handle everything else
-	app.get('*', (req, res) => {
-		const filePath = isDevelopment
-			? path.join(compiler.outputPath, 'index.html')
-			: path.resolve(__dirname, 'dist', 'index.html');
-
-		res.sendFile(filePath);
+	app.get('*', (req, res, next) => {
+		if (isDevelopment) {
+			const filePath = path.join(compiler.outputPath, 'index.html');
+			/**
+			 * `compiler.outputFileSystem.readFile` to read the file from Webpack’s 
+			 * in-memory filesystem
+			 */
+			compiler.outputFileSystem.readFile(filePath, (err, result) => {
+				if (err) {
+					return next(err);
+				}
+				res.set('content-type', 'text/html');
+				res.send(result);
+				res.end();
+			});
+		} else {
+			const filePath = path.resolve(__dirname, 'dist', 'index.html');
+			res.sendFile(filePath);
+		}
 	});
 
 	app.listen(PORT, () => {

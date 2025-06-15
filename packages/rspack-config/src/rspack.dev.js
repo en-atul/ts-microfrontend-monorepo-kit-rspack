@@ -31,9 +31,9 @@ export default ({ baseUrl, configs }) => {
 			new ModuleFederationPlugin({
 				name: configs.name,
 				filename: configs.filename,
+				shared: configs.shared,
 				exposes: createExposeEntries(configs.exposes),
 				remotes: createRemoteEntries(configs.remotes),
-				shared: configs.shared,
 			}),
 			new ReactRefreshPlugin(),
 			new rspack.HotModuleReplacementPlugin(),

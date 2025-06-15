@@ -21,7 +21,9 @@ const isDevServing = mode === 'development';
 const baseFederationConfig = {
 	name: 'hostApp',
 	filename: 'remoteEntry.js',
-	exposes: {},
+	exposes: {
+		'./Dummy': 'Dummy.tsx',
+	},
 	shared: {
 		...deps,
 		react: { singleton: true, eager: true, requiredVersion: deps.react },
