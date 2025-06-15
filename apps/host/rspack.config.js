@@ -49,7 +49,7 @@ const getEnvironmentConfig = (env) => {
 				remotes: {
 					remoteApp: `http://staging.example.com/remoteEntry.js`,
 				},
-				allowedOrigins: [],
+				allowedOrigins: ["http://staging.example.com/"],
 			};
 
 		case 'production':
@@ -58,7 +58,7 @@ const getEnvironmentConfig = (env) => {
 				remotes: {
 					remoteApp: 'http://localhost:3001/remoteEntry.js',
 				},
-				allowedOrigins: [],
+				allowedOrigins: ["http://localhost:3001/"],
 			};
 
 		default:
@@ -68,7 +68,7 @@ const getEnvironmentConfig = (env) => {
 				remotes: {
 					remoteApp: 'http://localhost:3001/remoteEntry.js',
 				},
-				allowedOrigins: [],
+				allowedOrigins: ["http://localhost:3001/"],
 			};
 	}
 };

@@ -25,7 +25,7 @@ export default ({ baseUrl, configs }) => {
 		output: {
 			publicPath: configs.publicPath,
 			hotUpdateChunkFilename: '[id].[fullhash].hot-update.js',
-			hotUpdateMainFilename: '[fullhash].hot-update.json',
+			hotUpdateMainFilename: '[runtime].[fullhash].hot-update.json'
 		},
 		plugins: [
 			new ModuleFederationPlugin({

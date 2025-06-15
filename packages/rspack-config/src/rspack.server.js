@@ -22,8 +22,9 @@ const start = ({ mode, appName, port, allowedOrigins, ...rest }) => {
 
 	app.use('/remoteEntry.js', (req, res, next) => {
 		const referer = req.get('origin') || req.get('referer');
+		const isSameOrigin = referer === rest.federationConfigs.publicPath;
 
-		if (allowedOrigins.some((origin) => referer && referer.startsWith(origin))) {
+		if (allowedOrigins.some((origin) => referer && referer.startsWith(origin)) || isSameOrigin) {
 			return next();
 		}
 
@@ -55,7 +56,7 @@ const start = ({ mode, appName, port, allowedOrigins, ...rest }) => {
 		if (isDevelopment) {
 			const filePath = path.join(compiler.outputPath, 'index.html');
 			/**
-			 * `compiler.outputFileSystem.readFile` to read the file from Webpack’s 
+			 * `compiler.outputFileSystem.readFile` to read the file from Webpack’s
 			 * in-memory filesystem
 			 */
 			compiler.outputFileSystem.readFile(filePath, (err, result) => {

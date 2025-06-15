@@ -12,18 +12,20 @@ function getFilePaths(importingFileUrl) {
 	return { __filename, __dirname };
 }
 
+/**
+ * Utility to parse command line arguments
+ * @param {string[]} argv - Array of command line arguments
+ * @returns {Object} Parsed arguments object
+ */
 function parseArgs(argv) {
 	const argsObject = {};
 
-	// Iterate through each argument
 	argv.forEach((arg) => {
-		// Check if the argument is in --key=value format
 		if (arg.includes('=')) {
 			const [key, value] = arg.split('=');
-			argsObject[key.slice(2)] = value; // Remove the '--' prefix and assign the value
+			argsObject[key.slice(2)] = value;
 		} else if (arg.startsWith('--')) {
-			// Handle flags with no value (e.g., --debug)
-			argsObject[arg.slice(2)] = true; // Treat flag as true
+			argsObject[arg.slice(2)] = true;
 		}
 	});
 
